@@ -30,7 +30,7 @@ const CreateField = (props) => {
 					body: body,
 				});
 				console.log(response);
-				props.onIssueCreated(); // Notify the parent component to refresh the issues list
+				//props.onIssueCreated(); // Notify the parent component to refresh the issues list
 			} catch (error) {
 				console.log(error);
 			}

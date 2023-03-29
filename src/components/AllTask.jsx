@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import CardItem from "./CardItem";
 const AllTask = (props) => {
 	const { data: session } = useSession();
+	const [issues, setIssues] = useState([]);
 
 	useEffect(() => {
 		if (session) {
@@ -16,7 +17,7 @@ const AllTask = (props) => {
 						owner: session.user.name,
 						repo: "MY_TASKS",
 					});
-					props.setIssues(response.data);
+					setIssues(response.data);
 					//console.log(response.data);
 				} catch (error) {
 					console.error("Error fetching issues:", error);
@@ -29,7 +30,7 @@ const AllTask = (props) => {
 		<div className="items-center flex flex-col justify-center">
 			<ul>
 				{" "}
-				{props.issues.map((issue) => (
+				{issues.map((issue) => (
 					<CardItem issue={issue} key={issue.id} />
 				))}
 			</ul>

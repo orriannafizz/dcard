@@ -24,7 +24,9 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"src/pages/api/hello.js",
-		"src/pages/api/hello.js"
+		"src/pages/api/hello.js",
+		"src/pages/index.jsx",
+		"src/pages/index.jsx"
 	],
 	"exclude": ["node_modules"]
 }

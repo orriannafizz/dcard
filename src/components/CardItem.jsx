@@ -13,6 +13,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DriveFileRenameOutlineOutlinedIcon from "@mui/icons-material/DriveFileRenameOutlineOutlined";
 import { useSession } from "next-auth/react";
+import Status from "./Status";
 
 const CardItem = (props) => {
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -21,7 +22,7 @@ const CardItem = (props) => {
 	const handleMenuClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
-
+	const [a, setA] = useState(0);
 	const handleMenuClose = () => {
 		setAnchorEl(null);
 	};
@@ -41,7 +42,7 @@ const CardItem = (props) => {
 					issue_number: props.issue.number,
 					state: "closed",
 				});
-				console.log(props.issue.number);
+				console.log(response);
 			} catch (error) {
 				console.log(error);
 			}

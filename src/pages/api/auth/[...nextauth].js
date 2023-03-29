@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
 export const authOptions = {
+    secret: "6220ce636ecaf37669d6ce0698912d42885ac66e085d5b94523d1ba23bc0e858",
     // Configure one or more authentication providers
     providers: [
         GithubProvider({
