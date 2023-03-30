@@ -24,8 +24,9 @@ const AllTask = (props) => {
 				}
 			};
 			fetchIssues();
+			console.log(issues);
 		}
-	});
+	}, [session]);
 	return (
 		<div className="items-center flex flex-col justify-center">
 			<ul>

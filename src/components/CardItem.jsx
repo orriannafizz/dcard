@@ -8,23 +8,34 @@ import {
 	Grid,
 	Menu,
 	MenuItem,
+	Button,
+	ListItemText,
+	ListItemIcon,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DriveFileRenameOutlineOutlinedIcon from "@mui/icons-material/DriveFileRenameOutlineOutlined";
 import { useSession } from "next-auth/react";
-import Status from "./Status";
 
 const CardItem = (props) => {
+	const [status, setStauts] = useState(props.issue.state);
 	const [anchorEl, setAnchorEl] = useState(null);
+	const [anchorElStatus, setAnchorElStatus] = useState(null);
+
 	const { data: session } = useSession();
 
 	const handleMenuClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
+	const handleStatusClick = (event) => {
+		setAnchorElStatus(event.currentTarget);
+	};
 	const [a, setA] = useState(0);
 	const handleMenuClose = () => {
 		setAnchorEl(null);
+	};
+	const handleStatusClose = () => {
+		setAnchorElStatus(null);
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
@@ -56,6 +67,41 @@ const CardItem = (props) => {
 		<div>
 			<CardContent className="shadow-xl rounded-xl max-w-lg">
 				<Grid container alignItems="center" justifyContent="space-between">
+					<Grid item>
+						<Button
+							variant="outlined"
+							color="inherit"
+							onClick={handleStatusClick}
+							size="small">
+							{props.issue.labels.length === 0
+								? "Open"
+								: props.issue.labels[0].name}
+						</Button>
+						<Menu
+							anchorEl={anchorElStatus}
+							open={Boolean(anchorElStatus)}
+							onClose={handleStatusClose}>
+							<MenuItem className="text-gray-600">
+								<ListItemIcon>
+									<div className="bg-gray-600 w-2 h-2"></div>
+								</ListItemIcon>
+								<ListItemText primary="Open" />
+							</MenuItem>
+							<MenuItem className="text-red-500">
+								<ListItemIcon>
+									<div className="bg-red-500 w-2 h-2"></div>
+								</ListItemIcon>
+								<ListItemText primary="In Progress" />
+							</MenuItem>
+							<MenuItem className="text-green-500">
+								<ListItemIcon>
+									<div className="bg-green-500 w-2 h-2"></div>
+								</ListItemIcon>
+								<ListItemText primary="Done" />
+							</MenuItem>
+						</Menu>
+					</Grid>
+
 					<Grid item>
 						<Typography sx={{ fontSize: 18 }} className="tracking-wider">
 							{props.issue.title}#{props.issue.number}
